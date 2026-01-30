@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4291bc897ae1c438802b159dbb0e9d, type: 3}
+  m_Name: ClickObject
+  m_EditorClassIdentifier: 
+  Itemname: "\u30AF\u30EA\u30C3\u30AF\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8"
+  Itemtype: 1
+  Itemicon: {fileID: 21300000, guid: ecc73b28d42b88747ac9348fd3efa04b, type: 3}
+  Itemexplanation: "\u30AF\u30EA\u30C3\u30AF\u3067\u53D6\u5F97\u306E\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u3060\u3088"
+  Itemlimit: 999

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4291bc897ae1c438802b159dbb0e9d, type: 3}
+  m_Name: strangthpotion
+  m_EditorClassIdentifier: 
+  Itemname: "\u529B\u306E\u30DD\u30FC\u30B7\u30E7\u30F3"
+  Itemtype: 0
+  Itemicon: {fileID: 21300000, guid: 5bd7026f516a2cd459db834ae5bc75df, type: 3}
+  Itemexplanation: "ATK\u306E\u5024\u30923\u79D2\u9593100\u4E0A\u3052\u308B"
+  Itemlimit: 5
+  effectType: 2
+  value: 100
+  duration: 3
