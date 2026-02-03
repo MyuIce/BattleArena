@@ -44,6 +44,7 @@ public class Enemystate1 : MonoBehaviour, IEnemy
 
     [Header("デバッグ")]
     [SerializeField] bool showDebugGizmos = true; // デバッグ用Gizmosの表示
+    public EnemyState CurrentState => currentState;
 
     private EnemyState currentState = EnemyState.Idle;
     private float attackCooldownTimer = 0f;

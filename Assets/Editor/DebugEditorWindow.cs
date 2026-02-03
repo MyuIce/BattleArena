@@ -8,7 +8,8 @@ using System.Linq;
 enum DebugPage
 {
     PlayerScene,
-    Item
+    Item,
+    Enemy
 }
 
 public class DebugEditorWindow : EditorWindow
@@ -45,6 +46,11 @@ public class DebugEditorWindow : EditorWindow
                 DrawItemHeldAmount();
                 GUILayout.Space(10);
                 break;
+            case DebugPage.Enemy:
+                DrawEnemySection();
+                GUILayout.Space(10);
+                break;
+
         }
         
     }
@@ -65,6 +71,13 @@ public class DebugEditorWindow : EditorWindow
             EditorStyles.toolbarButton))
         {
             currentPage = DebugPage.Item;
+        }
+        if (GUILayout.Toggle(
+            currentPage == DebugPage.Enemy,
+            "Enemy",
+            EditorStyles.toolbarButton))
+        {
+            currentPage = DebugPage.Enemy;
         }
         EditorGUILayout.EndHorizontal();
     }
@@ -210,5 +223,55 @@ public class DebugEditorWindow : EditorWindow
         }
         EditorGUILayout.EndScrollView();
         EditorGUILayout.EndVertical();
+    }
+
+    void DrawEnemySection()
+    {
+        GUILayout.Label("Enemy", EditorStyles.boldLabel);
+        if (!EditorApplication.isPlaying)
+        {
+            EditorGUILayout.HelpBox("PlayModeで実行してください", MessageType.Info);
+            return;
+        }
+        var enemies = FindObjectsOfType<Enemystate1>();
+        if (enemies.Length == 0)
+        {
+            EditorGUILayout.HelpBox("Enemyが見つかりません", MessageType.Warning);
+            return;
+        }
+        scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
+        foreach (var enemy in enemies)
+        {
+            EditorGUILayout.BeginHorizontal(EditorStyles.helpBox);
+
+            // 敵の名前を表示
+            EditorGUILayout.LabelField(enemy.name, GUILayout.Width(150));
+            // 状態によって色を変える（Editor画面）
+            Color stateColor = Color.white;
+            switch (enemy.CurrentState)
+            {
+                case EnemyState.Idle: stateColor = Color.gray; break;
+                case EnemyState.Chase: stateColor = Color.yellow; break;
+                case EnemyState.Attack: stateColor = Color.red; break;
+                case EnemyState.Cooldown: stateColor = Color.cyan; break;
+            }
+            // 色付きのラベル
+            GUI.contentColor = stateColor;
+            EditorGUILayout.LabelField($"[{enemy.CurrentState}]", EditorStyles.boldLabel, GUILayout.Width(100));
+            GUI.contentColor = Color.white;
+            // Selectボタン
+            if (GUILayout.Button("Select", GUILayout.Width(60)))
+            {
+                Selection.activeGameObject = enemy.gameObject;
+                EditorGUIUtility.PingObject(enemy.gameObject);
+            }
+            // killボタン
+            if (GUILayout.Button("Kill", GUILayout.Width(60)))
+            {
+                enemy.GetComponent<CharaDamage>()?.Damage(9999);
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+        EditorGUILayout.EndScrollView();
     }
 }
